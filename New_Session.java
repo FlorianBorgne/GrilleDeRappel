@@ -1,4 +1,4 @@
-package fr.koor.swing.samples;
+
 
 import javax.swing.*;
 
@@ -73,7 +73,7 @@ public class New_Session {
 					writer.close();
 					lines.add(dateStr);
 					JOptionPane.showMessageDialog(null,
-							"Fichier créer !");
+							"Fichier crÃ©er !");
 					valid = true;
 				}
 				catch (IOException e){
@@ -129,7 +129,7 @@ public class New_Session {
 					{
 						
 						JOptionPane.showMessageDialog(null,
-								"Vous avez rentré vos 12 questions !", "Attention",
+								"Vous avez rentrÃ© vos 12 questions !", "Attention",
 								JOptionPane.WARNING_MESSAGE);
 						frame.dispose();
 						menu = new Menu();
