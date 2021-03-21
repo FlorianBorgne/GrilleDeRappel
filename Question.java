@@ -1,4 +1,4 @@
-package fr.koor.swing.samples;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
