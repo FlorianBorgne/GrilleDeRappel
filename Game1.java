@@ -1,4 +1,4 @@
-package fr.koor.swing.samples;
+
 
 import java.awt.Color;
 import java.awt.Font;
@@ -178,73 +178,73 @@ public class Game1 extends JFrame{
 		if (rect1.contains(e.getX(), e.getY()) && flag[0]==false){
 			  new Proposition();
 			  count=count+1;
-			  System.out.println("Vous avez répondu à " + count + " question(s)");
+			  System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[0]=true;
 		}
 		else if(rect2.contains(e.getX(), e.getY()) && flag[1]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[1]=true;
 		}
 		else if(rect3.contains(e.getX(), e.getY()) && flag[2]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[2]=true;
 		}
 		else if(rect4.contains(e.getX(), e.getY()) && flag[3]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[3]=true;
 		}
 		else if(rect5.contains(e.getX(), e.getY()) && flag[4]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[4]=true;
 		}
 		else if(rect6.contains(e.getX(), e.getY()) && flag[5]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[5]=true;
 		}
 		else if(rect7.contains(e.getX(), e.getY()) && flag[6]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[6]=true;
 		}
 		else if(rect8.contains(e.getX(), e.getY()) && flag[7]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[7]=true;
 		}
 		else if(rect9.contains(e.getX(), e.getY()) && flag[8]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[8]=true;
 		}
 		else if(rect10.contains(e.getX(), e.getY()) && flag[9]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[9]=true;
 		}
 		else if(rect11.contains(e.getX(), e.getY()) && flag[10]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[10]=true;
 		}
 		else if(rect12.contains(e.getX(), e.getY()) && flag[11]==false) {
 			 new Proposition();
 			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
+			 System.out.println("Vous avez rÃ©pondu Ã  " + count + " question(s)");
 			  flag[11]=true;
 		}
 		}
@@ -317,7 +317,7 @@ public void Count() {
 				}
 				if (minute==0 && seconde == 0) {
 					timer.stop();
-					 System.out.println("Temps écoulé");
+					 System.out.println("Temps Ã©coulÃ©");
 					System.exit(1);				
 				}
 			}
