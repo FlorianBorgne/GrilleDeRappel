@@ -1,4 +1,4 @@
-package fr.koor.swing.samples;
+
 
 import javax.swing.*;
 
