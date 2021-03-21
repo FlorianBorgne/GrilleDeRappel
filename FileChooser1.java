@@ -1,4 +1,3 @@
-package fr.koor.swing.samples;
 
 import java.io.File;
 
