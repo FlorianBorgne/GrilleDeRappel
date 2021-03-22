@@ -1,37 +1,29 @@
-
 import java.awt.Color;
-import java.awt.EventQueue;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
 public class Proposition extends JFrame{
 	
-	
-	
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Proposition f = new Proposition(); 
-					f.setVisible(true);
-				}catch (Exception e) {
-					e.printStackTrace();
-					}
-				}
-		});
-}
-	
-	public Proposition() {
+	public Proposition(String question) {
 		JFrame jf;
 		jf=new JFrame("Proposition"); 
 		jf.setSize(600, 600);  
 		jf.setVisible(true);
 		jf.setLayout(null);  
+		jf.setLocationRelativeTo(null);
 		jf.setResizable(false);
+		
+		
+		JLabel jl = new JLabel();
+	   	 jl.setText(question);
+	    	String f= jl.getText();
+	    	jl.setBounds(10, 10, 500, 30);
+		jf.add(jl);
+		
 		jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 		JButton bouton1 = new JButton("Je ne sais pas");
 		bouton1.setBackground(Color.RED);
