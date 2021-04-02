@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -9,7 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
@@ -19,61 +23,78 @@ import javax.swing.JLabel;
 import javax.swing.*;
 
 public class Game1 extends JFrame{
+	public static ArrayList<String> r1 = new ArrayList<String>();
+	public static ArrayList<String> r2 = new ArrayList<String>();
+	public static ArrayList<String> r3 = new ArrayList<String>();
+	public static ArrayList<String> r4 = new ArrayList<String>();
+	public static ArrayList<String> r5 = new ArrayList<String>();
+	static JFrame f = new JFrame("Table de rappel");
+	static boolean flag [] = new boolean [13];
+	static int count=0;
+	static double score =0;
+	static double point;
 	
-	JFrame f = new JFrame("Table de rappel");
-	boolean flag [] = new boolean [12];
-	int count=0;
-	
-	JLabel l,m;
+	JLabel l;
+	static JLabel m;
+	JLabel n;
 	Font font1 = new Font("Arial", Font.PLAIN,15);
 
 	Timer timer;
-
 	int seconde;
 	int minute;
 	String SSeconde;
 	String SMinute;
 
 	DecimalFormat Format = new DecimalFormat("00");
+	
+	
+	
+	
 
 		
 	
 	public  Game1(ArrayList arrayList) {
-		    f.getContentPane().add(new Rectangle(arrayList));
-		    f.pack();
-		    f.setSize(1300, 950);  
-		    f.setVisible(true);
-		    f.setResizable(false);
-		    f.setLayout(null);
-		    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-			f.setVisible(true);
-		
-			l = new JLabel();
-			l.setBounds(800,0,750,100);
-			l.setHorizontalAlignment(JLabel.CENTER);
-			l.setFont(font1);
-			l.setText("Temps restant : 05:00");
-			seconde=0;
-			minute=5;
-			Count();
-			timer.start();
-			f.add(l);
-			
-			m=new JLabel();
-			m.setBounds(0,0,100,100);
-			m.setHorizontalAlignment(JLabel.CENTER);
-			m.setFont(font1);
-			m.setText("Score :");
-			f.add(m);
-
-
-			
-		
-		}
+        f.getContentPane().add(new Rectangle(arrayList));
+        f.pack();
+        f.setSize(1300, 950);  
+        f.setVisible(true);
+        f.setResizable(false);
+        f.setLayout(null);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
+        f.setVisible(true);
+    
+        l = new JLabel();
+        l.setBounds(30,0,300,100);
+        l.setHorizontalAlignment(JLabel.LEFT);
+        l.setFont(font1);
+        l.setText("Temps restant : 05:00");
+        seconde=0;
+        minute=5;
+        Count(arrayList);
+        timer.start();
+        f.add(l);
+        
+        
+        
+        m=new JLabel();
+        m.setBounds(1100,0,750,100);
+        m.setHorizontalAlignment(JLabel.LEFT);
+        m.setFont(font1);
+        m.setText("Score : " + score);
+        f.add(m);
+        
+        n=new JLabel();
+        n.setBounds(350,0,600,100);
+        n.setHorizontalAlignment(JLabel.CENTER);
+        n.setFont(font1);
+        n.setText("Tic Tac vous avez 5 minutes !");
+        f.add(n);  
+    }
 	
 	public  class Rectangle extends JPanel implements MouseListener
 	{
 		String q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12, q1s,q2s,q3s,q4s,q5s,q6s,q7s,q8s,q9s,q10s,q11s,q12s;
+		int nb;
 		Rectangle2D rect1= new Rectangle2D.Double(25,75,250,225);
 		Rectangle2D rect2= new Rectangle2D.Double(350,75,250,225);
 		Rectangle2D rect3= new Rectangle2D.Double(675,75,250,225);
@@ -87,6 +108,7 @@ public class Game1 extends JFrame{
 		Rectangle2D rect11= new Rectangle2D.Double(675,625,250,225);
 		Rectangle2D rect12= new Rectangle2D.Double(1000,625,250,225);
 	
+	
 	public  Rectangle(ArrayList arrayList) {
 		q1 = q1s  = (String) arrayList.get(0);
 		q2 = q2s = (String) arrayList.get(1);
@@ -99,7 +121,8 @@ public class Game1 extends JFrame{
 		q9 = q9s = (String) arrayList.get(8);
 		q10 = q10s = (String) arrayList.get(9);
 		q11 = q11s = (String) arrayList.get(10);
-		q12 = q12s = (String) arrayList.get(11);	
+		q12 = q12s = (String) arrayList.get(11);
+		
 		}
 	
 	
@@ -317,81 +340,74 @@ public class Game1 extends JFrame{
 	public void mouseClicked(MouseEvent e) {
 		if(count<12) {
 		if (rect1.contains(e.getX(), e.getY()) && flag[0]==false){
-			new Proposition(q1s);
-			  count=count+1;
-			  System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[0]=true;
+			nb=0;
+			new Proposition(q1s,nb,count,point,score);	 
+			flag[0]=true;
 		}
 		else if(rect2.contains(e.getX(), e.getY()) && flag[1]==false) {
-			 new Proposition(q2s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[1]=true;
+			 nb=1;
+			 new Proposition(q2s,nb,count,point,score);
+			 flag[1]=true;
+			
 		}
 		else if(rect3.contains(e.getX(), e.getY()) && flag[2]==false) {
-			 new Proposition(q3s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[2]=true;
+			 nb=2;
+			 new Proposition(q3s,nb,count,point,score);
+			 flag[2]=true;
 		}
 		else if(rect4.contains(e.getX(), e.getY()) && flag[3]==false) {
-			 new Proposition(q4s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[3]=true;
+			 nb=3;
+			 new Proposition(q4s,nb,count,point,score);
+			 flag[3]=true;
 		}
 		else if(rect5.contains(e.getX(), e.getY()) && flag[4]==false) {
-			 new Proposition(q5s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[4]=true;
+			 nb=4;
+			 new Proposition(q5s,nb,count,point,score);
+			 flag[4]=true;
 		}
 		else if(rect6.contains(e.getX(), e.getY()) && flag[5]==false) {
-			 new Proposition(q6s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[5]=true;
+			 nb=5;
+			 new Proposition(q6s,nb,count,point,score);
+			 flag[5]=true;
 		}
 		else if(rect7.contains(e.getX(), e.getY()) && flag[6]==false) {
-			 new Proposition(q7s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[6]=true;
+			 nb=6;
+			 new Proposition(q7s,nb,count,point,score);
+			 flag[6]=true;
 		}
 		else if(rect8.contains(e.getX(), e.getY()) && flag[7]==false) {
-			 new Proposition(q8s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[7]=true;
+			 nb=7;
+			 new Proposition(q8s,nb,count,point,score);
+			 flag[7]=true;
 		}
 		else if(rect9.contains(e.getX(), e.getY()) && flag[8]==false) {
-			 new Proposition(q9s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[8]=true;
+			 nb=8;
+			 new Proposition(q9s,nb,count,point,score);
+			 flag[8]=true;
+			
 		}
 		else if(rect10.contains(e.getX(), e.getY()) && flag[9]==false) {
-			 new Proposition(q10s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[9]=true;
+			 nb=9;
+			 new Proposition(q10s,nb,count,point,score);
+			 flag[9]=true;
 		}
 		else if(rect11.contains(e.getX(), e.getY()) && flag[10]==false) {
-			 new Proposition(q11s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[10]=true;
+			 nb=10;
+			 new Proposition(q11s,nb,count,point,score);
+			 flag[10]=true;
 		}
 		else if(rect12.contains(e.getX(), e.getY()) && flag[11]==false) {
-			 new Proposition(q12s);
-			 count=count+1;
-			 System.out.println("Vous avez répondu à " + count + " question(s)");
-			  flag[11]=true;
+			 nb=11;
+			 new Proposition(q12s,nb,count,point,score);	
+			 flag[11]=true;
 		}
 		}
-		if(count==12) {
+		if(count==12 && flag[12]==false ) {
 			 System.out.println("Fin du test");
-			System.exit(1);	
+			 f.dispose();
+			 GameOver g =new GameOver(score,r1,r2,r3,r4,r5);
+			 flag[12]=true;
+			
 		}
 		}
 			
@@ -433,7 +449,8 @@ public class Game1 extends JFrame{
 	
 	
 }
-public void Count() {
+
+public void Count(ArrayList arrayList) {
 
 		timer = new Timer(1000, new ActionListener() {
 			
@@ -458,18 +475,59 @@ public void Count() {
 				}
 				if (minute==0 && seconde == 0) {
 					timer.stop();
-					 System.out.println("Temps écoulé");
-					System.exit(1);				
+					for(int fl = 0; fl<12; fl++)
+					{
+						if(flag[fl]==false)
+						{
+							String q=(String) arrayList.get(fl);
+							r5.add(q);	
+						}
+						
+					}
+					System.out.println("Temps écoulé");
+					f.dispose();
+					GameOver g = new GameOver(score,r1,r2,r3,r4,r5);			
 				}
 			}
 		});
 }
+
+		public static void DateDoc(String datedoc)
+		{
+			
+			Date actuelle = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+ 	        Date date = new Date();
+			try {
+				date = formatter.parse(datedoc);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 	    
+			 
+ 	       
+			Long diff = (actuelle.getTime()-date.getTime())/(1000*60*60*24);
+			if (diff<=7) {
+				point=1;
+			}
+			if(diff>7 && diff <=14) {
+				point=2;
+			}
+			if(diff>14 && diff <=30) {
+				point=3;
+			}
+			if (diff>30) {
+				point=4;
+			}
+		}
+		
+		public static void Score(double score) {
+			  m.setText("Score : " + score);
+			f.repaint();
+		}
 }
-
-
-
-
-
+		
 
 
 
