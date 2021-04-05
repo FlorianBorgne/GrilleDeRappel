@@ -1,5 +1,3 @@
-
-
 import javax.swing.*;
 
 import java.awt.*;
@@ -39,15 +37,14 @@ public class New_Session {
 	public JButton getButton() {
 		return button;
 	}
-
+	
 	public void init() {
-
+		//Création de la fenêtre
 		frame = new JFrame("Grille de rappel");
 		frame.setPreferredSize(new Dimension(1300,800));
 		frame.getContentPane().setBackground(new Color(224,224,240));
 		frame.setTitle("Grille de rappel");
 		frame.setLayout(null);
-		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -61,17 +58,19 @@ public class New_Session {
 		button = new JButton("OK");
 		button.setBounds(625,80,212,65);
 		button.setFont(new java.awt.Font(Font.SANS_SERIF,Font.BOLD,25));
+		//Initialisation de la date
 		DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 		Date date = new Date();
-		String dateStr = dateformat.format(date); //Regler la date penser a l amettre  alacreation du fichier
+		String dateStr = dateformat.format(date);
+		//Bouton pour créer le fichier
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				String fileName = field.getText();
+				String fileName = field.getText(); //Nom fichier
 				String encoding = "UTF-8";
 				try{
-					PrintWriter writer = new PrintWriter(fileName, encoding);
+					PrintWriter writer = new PrintWriter(fileName, encoding);	//Création du fichier
 					writer.close();
-					lines.add(dateStr);
+					lines.add(dateStr);// Ajout de la date dans la liste
 					JOptionPane.showMessageDialog(null,
 							"Fichier créer !");
 					valid = true;
@@ -82,6 +81,7 @@ public class New_Session {
 				}
 			}
 		});
+		//Rentrer les questions
 		label2 = new JLabel("Rentrer une question puis valider (12 questions)");
 		label2.setBounds(30,350,600,50);
 		label2.setFont(new java.awt.Font(Font.SANS_SERIF,Font.BOLD,20));
@@ -91,10 +91,11 @@ public class New_Session {
 		area.setWrapStyleWord (false);
 		area.setFont(new java.awt.Font(Font.SANS_SERIF,Font.ITALIC,20));
 		button2 = new JButton("Valider");
-
+		
 		button2.setToolTipText( "Valider" );
 		button2.setFont(new java.awt.Font(Font.SANS_SERIF,Font.BOLD,25));
 		button2.setBounds(440,590,212,65);
+		//Bouton ajouter question
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				String texte = area.getText();
@@ -107,17 +108,17 @@ public class New_Session {
 				}
 				else
 				{
-					lines.add(texte);
+					lines.add(texte);	//On ajoute la question la liste
 					area.setSelectionStart(0);
 					area.setSelectionEnd(500);
-					area.cut();
+					area.cut();	//On sélectionne le texte et on le "coupe" pour permettre à l'utilisateur d'en mettre un nouveau
 
 					String fileName = field.getText();
 
 					try {
 
-						Path file = Paths.get(fileName);
-						Files.write(file, lines, StandardCharsets.UTF_8);
+						Path file = Paths.get(fileName);	//Récupère le nom du fichier et va permettre la modification
+						Files.write(file, lines, StandardCharsets.UTF_8);	//On écrit le contenu de la liste dans le fichier texte.
 					}
 					catch (IOException e){
 						System.out.println("An error occurred.");
@@ -125,7 +126,7 @@ public class New_Session {
 					}
 
 					cpt++;
-					if(cpt>=12)
+					if(cpt>=12)	//une fois les 12 questions rentrées on revient au menu
 					{
 						
 						JOptionPane.showMessageDialog(null,

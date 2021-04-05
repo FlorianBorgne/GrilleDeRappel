@@ -1,14 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+
 
 public class Question {
 	
@@ -18,39 +13,40 @@ public class Question {
 	public ArrayList<String> read(String arg) throws IOException, ParseException
 	 {
 		 
-		 BufferedReader buffer = new BufferedReader(new FileReader(arg));
+		 BufferedReader buffer = new BufferedReader(new FileReader(arg));	//Lit les lignes du fichier texte
 	     String s = new String();
 	     int flag=0;
 	     while ((s = buffer.readLine()) != null)
 	     {
+	    	 //Ici on s'occupe d'enregistrer la date
 	    	 if(flag==0)
 	    	 {
 	 	        
-	 	        Question.collection.add(s);
+	 	        Question.collection.add(s);	//On ajoute la date dans la liste
 	 	        flag=1;
 	 	        continue;
 	    	 }
-	    	 Question.collection.add(s);
+	    	 Question.collection.add(s);	//on ajoute les autres questions dans la liste
 	 
 	       
 	     }
-	
 
-	     ArrayList<String> list = new ArrayList<String>();
+
+	     ArrayList<String> list = new ArrayList<String>();	//deuxième liste pour mettre les questions dans un ordre aléatoire
 	     for (int i=0; i<12;i++) {
-	    	 	int r = random(collection.size());
-	        	list.add(collection.get(r));
-	        	collection.remove(r);
+	    	 	int r = random(collection.size());	//On sélectionne une position aléatoire dans la liste
+	        	list.add(collection.get(r));//On ajoute dans la nouvelle liste
+	        	collection.remove(r);//On supprime l'ancienne question
 	            
 	     }
-	     this.date=(collection.get(0));
+	     this.date=(collection.get(0));//On met la date dans une variable
 	     buffer.close();
 		return list;
 	 }
 	
 	
 
-
+	//fonction random
 	public int random(int higher)
 	{
 		return (int)(Math.random() * (higher-1)) + 1;

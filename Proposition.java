@@ -8,10 +8,11 @@ import javax.swing.JTextArea;
 
 
 public class Proposition extends JFrame{
-	
+
 	
 
 	public Proposition(String question, int i, int count, double point, double score) {
+		//initialisation  de la fenêtre
 		JFrame jf;
 		Game1.flag[i]=false;
 		jf=new JFrame("Proposition"); 
@@ -23,7 +24,7 @@ public class Proposition extends JFrame{
 		jf.setResizable(false);
 		
 		
-		
+		//Carré de la question
 		JTextArea ta = new JTextArea(question);
 		ta.setLineWrap(true);
 		ta.setEditable(false);
@@ -56,9 +57,9 @@ public class Proposition extends JFrame{
 		jf.add(bouton2);
 		bouton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				Game1.r2.add(question);
-				Game1.flag[i]=true;
-				Game1.score=score+(point/2);
+				Game1.r2.add(question);			//on ajoute la question dans la liste adéquate
+				Game1.flag[i]=true;				//pour ne pas recliquer sur la question
+				Game1.score=score+(point/2);	//calcul des points
 				Game1.Score(Game1.score);
 				Game1.count=count+1; 
 				jf.dispose();
@@ -71,9 +72,9 @@ public class Proposition extends JFrame{
 		jf.add(bouton3);
 		bouton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				Game1.r3.add(question);
-				Game1.flag[i]=true;
-				Game1.score=score+(point/2);
+				Game1.r3.add(question);			//on ajoute la question dans la liste adéquate
+				Game1.flag[i]=true;				//pour ne pas recliquer sur la question
+				Game1.score=score+(point/2);	//calcul des points
 				Game1.Score(Game1.score);
 				Game1.count=count+1; 
 				jf.dispose();
@@ -86,10 +87,10 @@ public class Proposition extends JFrame{
 		jf.add(bouton4);
 		bouton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				Game1.r4.add(question);
-				Game1.flag[i]=true;
-				Game1.score=score+point;
-				Game1.Score(Game1.score);
+				Game1.r4.add(question);		//on ajoute la question dans la liste adéquate
+				Game1.flag[i]=true;			//pour ne pas recliquer sur la question
+				Game1.score=score+point;	//calcul des points
+				Game1.Score(Game1.score);	
 				Game1.count=count+1; 
 				jf.dispose();
 			}

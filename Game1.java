@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -54,6 +52,7 @@ public class Game1 extends JFrame{
 		
 	
 	public  Game1(ArrayList arrayList) {
+		//Initialisation de la fenêtre
         f.getContentPane().add(new Rectangle(arrayList));
         f.pack();
         f.setSize(1300, 950);  
@@ -70,7 +69,7 @@ public class Game1 extends JFrame{
         l.setText("Temps restant : 05:00");
         seconde=0;
         minute=5;
-        Count(arrayList);
+        Count(arrayList);	//Timer
         timer.start();
         f.add(l);
         
@@ -91,6 +90,7 @@ public class Game1 extends JFrame{
         f.add(n);  
     }
 	
+	//fonction pour afficher les rectangles
 	public  class Rectangle extends JPanel implements MouseListener
 	{
 		String q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12, q1s,q2s,q3s,q4s,q5s,q6s,q7s,q8s,q9s,q10s,q11s,q12s;
@@ -108,7 +108,7 @@ public class Game1 extends JFrame{
 		Rectangle2D rect11= new Rectangle2D.Double(675,625,250,225);
 		Rectangle2D rect12= new Rectangle2D.Double(1000,625,250,225);
 	
-	
+	//On récupère les questions
 	public  Rectangle(ArrayList arrayList) {
 		q1 = q1s  = (String) arrayList.get(0);
 		q2 = q2s = (String) arrayList.get(1);
@@ -121,8 +121,7 @@ public class Game1 extends JFrame{
 		q9 = q9s = (String) arrayList.get(8);
 		q10 = q10s = (String) arrayList.get(9);
 		q11 = q11s = (String) arrayList.get(10);
-		q12 = q12s = (String) arrayList.get(11);
-		
+		q12 = q12s = (String) arrayList.get(11);	
 		}
 	
 	
@@ -132,13 +131,14 @@ public class Game1 extends JFrame{
 		  return new Rectangle2D.Double(rect.getX() + dx, rect.getY() + dy, rect.getWidth(), rect.getHeight());
 		}
 	
-
+	//Dessin des 12 rectangles
 	public void paint(Graphics g){
 		
 	    Graphics2D g2 = (Graphics2D) g;
-	    Font fonte = new Font("TimesRoman ",Font.BOLD,12);
-	    Font font = getFont();
+	    Font fonte = new Font("TimesRoman ",Font.BOLD,12);	//Police d'écriture
+	    Font font = getFont();	
 	    FontMetrics fm = getFontMetrics(font);
+	    //Coordonnée du texte
         int x1 = (int) ((rect1.getX() + 10));
         int y1 = (int) ((rect1.getY() +  (rect1.getY()+rect1.getHeight())) / 2);
         int size1 = fm.stringWidth(q1);
@@ -153,7 +153,7 @@ public class Game1 extends JFrame{
         	}
         	q1=newQ1 + " ...";
         }
-	    g2.drawString(q1, x1, y1);
+	    g2.drawString(q1, x1, y1);	//Affichage du texte
 	    int x2 = (int) ((rect2.getX() + 10));
         int y2 = (int) ((rect2.getY() +  (rect2.getY()+rect2.getHeight())) / 2);
         int size2 = fm.stringWidth(q2);
@@ -335,14 +335,15 @@ public class Game1 extends JFrame{
 	    this.addMouseListener(this);
 	  }
 	
-
+	//Fonction clic souris
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		//Il faut répondre aux 12 questions
 		if(count<12) {
 		if (rect1.contains(e.getX(), e.getY()) && flag[0]==false){
 			nb=0;
-			new Proposition(q1s,nb,count,point,score);	 
-			flag[0]=true;
+			new Proposition(q1s,nb,count,point,score);	 //Ouvre la fenetre des questions
+			flag[0]=true;	//Cela permet de ne pas recliquer sur une question déjà répondue
 		}
 		else if(rect2.contains(e.getX(), e.getY()) && flag[1]==false) {
 			 nb=1;
@@ -403,9 +404,8 @@ public class Game1 extends JFrame{
 		}
 		}
 		if(count==12 && flag[12]==false ) {
-			 System.out.println("Fin du test");
 			 f.dispose();
-			 GameOver g =new GameOver(score,r1,r2,r3,r4,r5);
+			 GameOver g =new GameOver(score,r1,r2,r3,r4,r5);	//On passe au game over
 			 flag[12]=true;
 			
 		}
@@ -452,7 +452,7 @@ public class Game1 extends JFrame{
 
 public void Count(ArrayList arrayList) {
 
-		timer = new Timer(1000, new ActionListener() {
+		timer = new Timer(1000, new ActionListener() {	//1000 permet l'écoulement du timer normal (cad 1 minute en 60s)
 			
 			
 			@Override
@@ -460,12 +460,13 @@ public void Count(ArrayList arrayList) {
 				
 				timer.setRepeats(true);
 				seconde--;
+				//On initialise les minutes
 				SSeconde = Format.format(seconde);
-				SMinute = Format.format(minute);
+				SMinute = Format.format(minute);	//5
 				l.setText("Temps restant : " + SMinute + ":" + SSeconde);
 				f.repaint();
 				
-				
+				//écoulement du temps : passage de 00 à 59
 				if (seconde==-1) {
 					seconde= 59;
 					minute--;
@@ -473,10 +474,12 @@ public void Count(ArrayList arrayList) {
 					SMinute = Format.format(minute);
 					l.setText("Temps restant : " + SMinute + ":" + SSeconde);	
 				}
+				//Timer à 00:00
 				if (minute==0 && seconde == 0) {
 					timer.stop();
 					for(int fl = 0; fl<12; fl++)
 					{
+						//on enregistre les questions auquel on a pas répondu
 						if(flag[fl]==false)
 						{
 							String q=(String) arrayList.get(fl);
@@ -486,7 +489,7 @@ public void Count(ArrayList arrayList) {
 					}
 					System.out.println("Temps écoulé");
 					f.dispose();
-					GameOver g = new GameOver(score,r1,r2,r3,r4,r5);			
+					GameOver g = new GameOver(score,r1,r2,r3,r4,r5);		//On passe au Game Over	
 				}
 			}
 		});
@@ -528,7 +531,6 @@ public void Count(ArrayList arrayList) {
 		}
 }
 		
-
 
 
 

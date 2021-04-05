@@ -1,5 +1,4 @@
 
-
 import java.io.File;
 
 
@@ -12,18 +11,14 @@ import javax.swing.filechooser.FileSystemView;
 public class FileChooser1 {
 	public String sf = new String();
 	
-	
+	//Pour récupérer
 	public String getSf() {
 		return this.sf;
 	}
-	
+
 	
     public void init() {
     	
-    
-
-    	
-
     	
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
